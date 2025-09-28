@@ -1,12 +1,12 @@
-import multer from "multer";
-import path from "path";
-import fs from "fs";
 
+// import multer from "multer";
+// import path from "path";
+/*
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
     const dir = "./public/temp";
     if (!fs.existsSync(dir)) {
-      fs.mkdirSync(dir, { recursive: true }); // ensure folder exists
+      fs.mkdirSync(dir, { recursive: true });
     }
     cb(null, dir);
   },
@@ -18,7 +18,7 @@ const storage = multer.diskStorage({
 
 export const upload = multer({
   storage,
-  limits: { fileSize: 5 * 1024 * 1024 }, // max file size 5MB
+  limits: { fileSize: 5 * 1024 * 1024 }, // 5MB limit
   fileFilter: function (req, file, cb) {
     const allowedTypes = /jpeg|jpg|png|gif/;
     const extName = allowedTypes.test(path.extname(file.originalname).toLowerCase());
@@ -30,4 +30,23 @@ export const upload = multer({
       cb(new Error("Only images are allowed"));
     }
   }
-});
+}); */
+
+
+
+
+import multer from "multer";
+
+const storage = multer.diskStorage({
+    destination: function (req, file, cb) {
+      cb(null, "./public/temp")
+    },
+    filename: function (req, file, cb) {
+      
+      cb(null, file.originalname)
+    }
+  })
+  
+export const upload = multer({ 
+    storage, 
+})
